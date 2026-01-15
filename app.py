@@ -120,4 +120,26 @@ if 'leaderboard' not in st.session_state:
 
 if 'rps_wins' not in st.session_state:
     st.session_state.rps_wins = 0
+    # 1. SETUP THE SCOREBOARD (Run this first)
+if 'leaderboard' not in st.session_state:
+    st.session_state.leaderboard = []
+
+if 'rps_wins' not in st.session_state:
+    st.session_state.rps_wins = 0
+elif (user_move == "Rock" and ai_move == "Scissors") or \
+         (user_move == "Paper" and ai_move == "Rock") or \
+         (user_move == "Scissors" and ai_move == "Paper"):
+        st.success("You Win!")
+        # TRACK THE WIN
+        st.session_state.rps_wins += 1 
+        # ADD TO LEADERBOARD
+        st.session_state.leaderboard.append({"Game": "RPS", "Player": player_name, "Score": "Win"})
+elif (user_move == "Rock" and ai_move == "Scissors") or \
+         (user_move == "Paper" and ai_move == "Rock") or \
+         (user_move == "Scissors" and ai_move == "Paper"):
+        st.success("You Win!")
+        st.session_state.rps_wins += 1 
+        st.session_state.leaderboard.append({"Game": "RPS", "Player": player_name, "Score": "Win"})
+else:
+        st.error("AI Wins!")
     
