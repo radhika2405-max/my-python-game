@@ -114,4 +114,10 @@ st.sidebar.write(f"✊ RPS Wins: **{st.session_state.rps_wins}**")
 
 if st.session_state.detective_best_score:
     st.sidebar.write(f"🕵️ Best Detective Score: **{st.session_state.detective_best_score} tries**")
+    # --- INITIALIZE SCORES (The Setup) ---
+if 'leaderboard' not in st.session_state:
+    st.session_state.leaderboard = []
+
+if 'rps_wins' not in st.session_state:
+    st.session_state.rps_wins = 0
     
