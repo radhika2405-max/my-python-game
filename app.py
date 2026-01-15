@@ -82,3 +82,36 @@ elif game_choice == "✊ Rock Paper Scissors":
         else:
             st.error("The AI wins!")
             speak("I am the superior machine.")
+            # Add this near the top with your other variables
+if 'leaderboard' not in st.session_state:
+    st.session_state.leaderboard = []
+
+# When someone wins Number Detective, add this:
+st.session_state.leaderboard.append({"Name": player_name, "Score": attempts})
+st.sidebar.markdown("---")
+st.sidebar.subheader("🏆 Leaderboard")
+for entry in st.session_state.leaderboard:
+    st.sidebar.write(f"{entry['Name']}: {entry['Score']} tries")
+# Create a storage for scores if it doesn't exist yet
+if 'rps_wins' not in st.session_state:
+    st.session_state.rps_wins = 0
+if 'detective_best_score' not in st.session_state:
+    st.session_state.detective_best_score = None
+    if user_move == ai_move:
+        st.info("It's a draw!")
+    elif (user_move == "Rock" and ai_move == "Scissors") or \
+         (user_move == "Paper" and ai_move == "Rock") or \
+         (user_move == "Scissors" and ai_move == "Paper"):
+        st.success("You Win!")
+        # --- ADD THIS LINE BELOW ---
+        st.session_state.rps_wins += 1 
+    else:
+        st.error("AI Wins!")
+        st.sidebar.markdown("---")
+st.sidebar.subheader("🏆 Your Stats")
+st.sidebar.write(f"👤 Player: **{player_name}**")
+st.sidebar.write(f"✊ RPS Wins: **{st.session_state.rps_wins}**")
+
+if st.session_state.detective_best_score:
+    st.sidebar.write(f"🕵️ Best Detective Score: **{st.session_state.detective_best_score} tries**")
+    
